@@ -6,27 +6,13 @@ A web-based real-time DIAG log viewer for NR/LTE RRC and NAS messages.
 
 ---
 
-## 🌐 Online Demo
-
-**[Try Online Demo](https://huggingface.co/spaces/Joostone/dm-viewer)**
-
-> Note: The demo runs in File Mode only. Upload .pcap or DM log files to decode. USB capture is available in the local version.
-
----
-
 ## 💡 Why This Tool?
 
 DM Viewer connects directly to USB DIAG ports on macOS and Windows (WSL), capturing and decoding NR/LTE RRC and NAS messages in real-time in your browser. Saved log files (.pcap, .hdf, .qmdl, .dlf) can also be loaded and decoded.
 
 Log analysis has always been manual — read messages, check against spec, make a judgment. Existing tools offer text export or copy-paste, but there's always an extra step before automation is possible. DM Viewer eliminates that step with a single pipeline — capture, decode, analyze — that connects directly to automation.
 
-This pipeline enables automated compliance checks, PHY-layer visualization from raw config, and pass/fail logic for test procedures. Currently it covers RRC and NAS, but the plan is to expand into radio measurements, throughput, and RF conditions — enabling a much wider range of automated field analysis.
-
----
-
-## 🖥️ Screenshot
-
-![DM Viewer](docs/images/screenshot_dm_viewer.png)
+This pipeline enables automated compliance checks, PHY-layer visualization from raw config, and pass/fail logic for test procedures. Currently it covers RCC and NAS, but the plan is to expand into radio measurements, throughput, and RF conditions — enabling a much wider range of automated field analysis.
 
 ---
 
@@ -36,9 +22,18 @@ This pipeline enables automated compliance checks, PHY-layer visualization from 
 - **Cross-platform**: macOS (native) and Windows (WSL2 + usbipd)
 - **Direct USB DIAG**: Access via scat + pyusb, no commercial tools needed
 - **File Load**: Open .pcap / .hdf / .qmdl / .dlf files
-- **Protocol Support**: NR-RCC, LTE-RRC, NAS-5GS, NAS-EPS
+- **Protocol Support**: NR-RRC, LTE-RRC, NAS-5GS, NAS-EPS
 - **AT Command**: Power Off/On (AT+CFUN) without leaving the tool
-- **Dark/Light Theme**: Manual toggle, saved in browser
+
+---
+
+## 🌐 Online Demo
+
+**[Try Online Demo](https://huggingface.co/spaces/Joostone/dm-viewer)**
+
+> Note: The demo runs in File Mode only. Upload .pcap or DM log files to decode. USB capture is available in the local version.
+
+![DM Viewer](docs/images/screenshot_dm_viewer.png)
 
 ---
 
