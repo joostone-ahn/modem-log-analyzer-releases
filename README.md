@@ -6,6 +6,14 @@ A web-based real-time DIAG log viewer for NR/LTE RRC and NAS messages.
 
 ---
 
+## 🌐 Online Demo
+
+**[Try Online Demo](https://huggingface.co/spaces/Joostone/dm-viewer)**
+
+> Note: The demo runs in File Mode only. Upload .pcap or DM log files to decode. USB capture is available in the local version.
+
+---
+
 ## 💡 Why This Tool?
 
 DM Viewer connects directly to USB DIAG ports on macOS and Windows (WSL), capturing and decoding NR/LTE RRC and NAS messages in real-time in your browser. Saved log files (.pcap, .hdf, .qmdl, .dlf) can also be loaded and decoded.
