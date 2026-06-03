@@ -177,11 +177,6 @@ Click a message to display the full decoding tree on the right.
 |-----|--------|
 | `↑` / `↓` | Select previous/next message |
 
-### 4.6 Theme
-
-Click the 🌙/☀️ button in the top-right corner to toggle dark/light mode.  
-Default is dark mode. Your selection is saved in the browser.
-
 ---
 
 ## 5. AT Command (Power Off/On)
@@ -226,7 +221,21 @@ Alternatively: Settings → System → Recovery → Advanced startup → UEFI Fi
 VirtualMachinePlatform is a Windows kernel feature that requires a reboot on first activation.  
 After rebooting, run `setup-wsl.bat` again to continue installation.
 
-### 6.4 Windows: USB Port Not Released (Abnormal Termination)
+### 6.4 Windows: Browser Cannot Connect to Page
+
+**Symptom:** Server shows "starting on port 8340" but browser displays `ERR_CONNECTION_REFUSED`
+
+**Cause:** WSL2 uses a virtual network, and Windows accesses localhost through WSL2 → Windows forwarding. If `run-wsl.bat` is executed again without stopping the previous server, this forwarding can temporarily break.
+
+**Solution:**
+
+1. Wait 30 seconds to 1 minute, then refresh the browser
+2. If still not working, run `wsl --shutdown` in an Administrator CMD, then re-run `run-wsl.bat`
+3. If that doesn't help, reboot Windows
+
+**Prevention:** Always use **Ctrl+C** to stop the server. Avoid closing the CMD window with the X button or running `run-wsl.bat` again while the server is still running.
+
+### 6.5 Windows: USB Port Not Released (Abnormal Termination)
 
 **Symptom:** After closing DM Viewer, COM ports are not visible in QXDM or other tools
 
