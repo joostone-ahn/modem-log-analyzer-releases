@@ -148,6 +148,20 @@
 | `.dlf` | Qualcomm DLF 로그 |
 | `.sdm` | Samsung Shannon DM 로그 (미검증) |
 
+### 3.3 Save (PCAP 다운로드)
+
+파일 파싱 완료 후 툴바에 **Save** 버튼이 나타납니다.
+
+| 업로드 파일 | Save 동작 |
+|------------|-----------|
+| `.pcap` | 업로드한 원본 pcap 파일을 그대로 다운로드 |
+| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | scat으로 변환된 pcap 파일을 다운로드 |
+
+**활용:**
+- DM 로그 파일을 pcap으로 변환하여 Wireshark에서 직접 열어볼 수 있습니다
+- 변환된 pcap을 NR RRC Visualizer에 업로드하여 PHY 파라미터 분석이 가능합니다
+- 팀원에게 공유 시 Wireshark 호환 포맷으로 전달할 수 있습니다
+
 ---
 
 ## 4. 메시지 뷰어

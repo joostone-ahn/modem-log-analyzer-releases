@@ -148,6 +148,20 @@ Click **Disconnect** to stop the capture.
 | `.dlf` | Qualcomm DLF log |
 | `.sdm` | Samsung Shannon DM log (untested) |
 
+### 3.3 Save (PCAP Download)
+
+After file parsing completes, a **Save** button appears in the toolbar.
+
+| Uploaded File | Save Action |
+|---------------|-------------|
+| `.pcap` | Downloads the original pcap file as-is |
+| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | Downloads the pcap converted by scat |
+
+**Use cases:**
+- Convert DM log files to pcap format for direct viewing in Wireshark
+- Upload the converted pcap to NR RRC Visualizer for PHY parameter analysis
+- Share logs with teammates in a Wireshark-compatible format
+
 ---
 
 ## 4. Message Viewer
