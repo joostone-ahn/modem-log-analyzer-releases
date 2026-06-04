@@ -10,22 +10,36 @@
 2. [USB Real-time Capture](#2-usb-real-time-capture)
 3. [File Loading](#3-file-loading)
 4. [Message Viewer](#4-message-viewer)
-5. [AT Command (Power Off/On)](#5-at-command-power-offon)
-6. [Troubleshooting](#6-troubleshooting)
-7. [How to Exit](#7-how-to-exit)
+5. [Troubleshooting](#5-troubleshooting)
+6. [How to Exit](#6-how-to-exit)
 
 ---
 
 ## 1. Running the Program
 
-1. Download `DM-Viewer.exe` from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)
-2. Double-click `DM-Viewer.exe`
-3. The browser opens automatically: http://localhost:8340
+### Windows (EXE)
+
+1. Download the latest `DM-Viewer-vX.X.X.exe` from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)
+2. **Run as Administrator** (right-click → Run as administrator recommended)
+3. A splash screen appears while the environment is configured
+4. The browser opens automatically: http://localhost:8340
 
 > **First run:** WSL2, usbipd-win, scat, tshark are installed automatically. A reboot may be required.  
-> **Subsequent runs:** Instant startup.
+> **Subsequent runs:** WSL reset + server start (approx. 10 seconds).  
+> **Re-launch while running:** If a previous instance exists, WSL is reset. The "Resetting WSL..." step may take 10–15 seconds.
 
 ⚠️ **Note:** On first run, a `dm-viewer-linux` file is created next to the exe. Do not delete this file.
+
+### macOS (Private Distribution)
+
+The macOS version (ZIP) is available upon request.
+
+> **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
+
+After receiving the ZIP file:
+1. Extract the archive
+2. Double-click `run/run.command` (first run installs venv + dependencies automatically)
+3. The browser opens automatically: http://localhost:8340
 
 ---
 
@@ -33,60 +47,64 @@
 
 ### 2.1 Device Preparation
 
-The smartphone must expose a diagnostic (DIAG) port over USB. This varies by device, so providing a universal solution for all devices is difficult.
+The smartphone must expose a diagnostic (DIAG) port over USB.
 
 **Samsung:**
-- Enter `*#0808#` in the phone dialer → Select any USB mode entry containing DM (e.g., DM+MODEM+ADB)
-- Korean models: Enter `3197123580` in the dialer, password is `996412`, `776432`, or `0821`
+- Enter `*#0808#` in the phone dialer → Select any USB mode containing DM (e.g., DM+MODEM+ADB)
+- Korean models: Enter `3197123580` in the dialer, password `996412`, `776432`, or `0821`
 
 **Apple iPhone (Qualcomm baseband):**
 - Settings → Carrier Settings → Baseband Manager → Logging Settings → **Qualcomm**: Passive, External Hardware (QXDM)
 
-> **Tested devices:** Samsung Galaxy Z Fold7, iPhone 17 Pro (both Qualcomm chipsets)  
-> Samsung Exynos-based devices (.sdm format) have not been tested yet.
+> **Tested devices:** Samsung Galaxy Z Fold7, iPhone 17 Pro (Qualcomm chipsets)
 
-### 2.2 Windows: Verify USB Port Before Launch
+### 2.2 Connection (Connect)
 
-Before running `run-wsl.bat`, verify that the USB device is recognized in Windows.
+1. Connect the device to PC via USB
+2. **Windows:** Verify the port appears in Device Manager
+3. Click the **Connect** button in the browser
+4. Device detection → USB transfer to WSL → scat start (approx. 8 seconds)
+5. Status indicator turns green ● and messages appear in real time
 
-1. Enable DIAG mode on the device (see 2.1)
-2. Connect the USB cable
-3. Check **Device Manager**: `Win+X` → Device Manager → Ports (COM & LPT) or Universal Serial Bus devices — confirm the device appears
-4. Once the port is visible, run `run-wsl.bat` as Administrator
+> During Connect, the USB port moves from Windows to WSL. It disappears from Device Manager — this is normal.
 
-> If the port is not recognized, `run-wsl.bat` will fail to bind the USB device via usbipd.  
-> If the port doesn't appear, try a different USB cable, a different port, or re-enable DIAG mode on the device.  
-> If USB is disconnected and reconnected during capture, exit `run-wsl.bat` (Ctrl+C), verify the port appears again, then re-run.
-
-### 2.3 Connection
-
-1. Connect the smartphone via USB
-2. Click the **Connect** button in the browser
-3. Once the device is detected, capture starts automatically
-4. Status indicator turns green ● and messages appear in real time
-
-### 2.4 Controls During Capture
+### 2.3 Controls During Capture
 
 | Button | Action |
 |--------|--------|
-| Disconnect | Stop capture |
-| Power Off/On | Toggle modem power (AT+CFUN=0/1) |
+| Disconnect | Stop capture + return USB to Windows |
 | Save | Download captured data as pcap file |
 | Auto-scroll | Toggle auto-scroll on new messages |
 | Clear | Clear on-screen messages (capture continues) |
 
-### 2.5 Disconnection
+> **Power Off/On button:** Only visible on macOS. Sends AT+CFUN=0/1 to toggle modem power, allowing you to capture the full Registration sequence from the beginning.
 
-Click **Disconnect** to stop the capture and return the USB device to Windows.
+### 2.4 Disconnection (Disconnect)
 
-### 2.6 Device Switching
+Clicking **Disconnect**:
+1. Stops the scat capture
+2. Detaches and unbinds the USB device from WSL
+3. The port reappears in Windows Device Manager
+4. Other tools (QXDM, etc.) can now use the port
 
-1. Click **Disconnect** → USB returns to Windows (verify port in Device Manager)
-2. Unplug the current device and connect a new one
-3. Verify the new device port appears in Device Manager
-4. Click **Connect** → Capture starts on the new device
+### 2.5 Device Switching
 
-> Device switching is possible without restarting the app.
+Switch devices without restarting the app:
+
+1. Click **Disconnect**
+2. Verify the port returns in Device Manager
+3. Unplug the current device and connect a new one
+4. Verify the new device port appears in Device Manager
+5. Click **Connect** → Capture starts on the new device
+
+### 2.6 USB Physical Disconnect During Capture
+
+If USB is physically unplugged during capture:
+- Watchdog detects the disconnect within 2 seconds
+- "USB disconnected" error is displayed
+- Capture stops automatically
+- **Connect** button reappears
+- Reconnect the device and click **Connect** to resume
 
 ---
 
@@ -94,32 +112,35 @@ Click **Disconnect** to stop the capture and return the USB device to Windows.
 
 ### 3.1 Upload
 
-1. Click **Open File**, or drag and drop a file onto the screen
-2. After parsing, the message list is displayed
+1. Select the **File Mode** tab at the top
+2. Click **Open File**, or drag and drop a file onto the screen
+3. After parsing, the message list is displayed
 
 ### 3.2 Supported Formats
 
 | Extension | Description |
 |-----------|-------------|
 | `.pcap` | Wireshark capture file (parsed directly by tshark) |
-| `.hdf` | Qualcomm HDF log (converted to pcap via scat, then parsed) |
+| `.hdf` | Qualcomm HDF log (converted to pcap via scat) |
 | `.qmdl` | Qualcomm QMDL log |
 | `.dlf` | Qualcomm DLF log |
 | `.sdm` | Samsung Shannon DM log (untested) |
 
 ### 3.3 Save (PCAP Download)
 
-After file parsing completes, a **Save** button appears in the toolbar.
+After file parsing, a **Save** button appears in the toolbar.
 
 | Uploaded File | Save Action |
 |---------------|-------------|
-| `.pcap` | Downloads the original pcap file as-is |
+| `.pcap` | Downloads the original pcap as-is |
 | `.hdf` / `.qmdl` / `.dlf` / `.sdm` | Downloads the pcap converted by scat |
 
 **Use cases:**
-- Convert DM log files to pcap format for direct viewing in Wireshark
-- Upload the converted pcap to NR RRC Visualizer for PHY parameter analysis
-- Share logs with teammates in a Wireshark-compatible format
+- Convert DM logs to pcap for viewing in Wireshark
+- Decoding in Wireshark requires the [scat.lua](https://raw.githubusercontent.com/fgsect/scat/master/wireshark/scat.lua) plugin
+- Installation: download and copy to Wireshark plugin directory  
+  - macOS/Linux: `~/.local/lib/wireshark/plugins/scat.lua`  
+  - Windows: `%APPDATA%\Wireshark\plugins\scat.lua`
 
 ---
 
@@ -131,7 +152,7 @@ After file parsing completes, a **Save** button appears in the toolbar.
 |------|-------------|
 | Left panel | Message list table |
 | Right panel | Detailed ASN.1 decoding of selected message |
-| Panel divider | Drag to adjust left/right panel ratio |
+| Panel divider | Drag to adjust left/right ratio |
 
 ### 4.2 Message Table
 
@@ -143,7 +164,7 @@ After file parsing completes, a **Save** button appears in the toolbar.
 | Channel | DL-DCCH, UL-DCCH, BCCH-DL-SCH, etc. |
 | Message | Message name |
 
-Protocol color coding:
+Protocol colors:
 - **NR-RRC**: Blue
 - **LTE-RRC**: Green
 - **NAS-5GS**: Purple
@@ -168,172 +189,68 @@ Click a message to display the full decoding tree on the right.
 
 ---
 
-## 5. AT Command (Power Off/On)
+## 5. Troubleshooting
 
-During capture, click **Power Off** to send `AT+CFUN=0` (modem RF off).  
-The button changes to **Power On** — click it to send `AT+CFUN=1` (modem RF on).
+### 5.1 "No DIAG devices found" (Connect Fails)
 
-This allows you to capture the full Attach/Registration sequence from the beginning.
+- Check USB cable (charge-only cables cannot transfer data)
+- Verify DIAG port is enabled (see section 2.1)
+- On Windows, verify the port appears in Device Manager before clicking Connect
+- Close other programs (QXDM, Wireshark) that may hold the USB port
 
-> ⚠️ **This feature is currently disabled on Windows (EXE).** A technical limitation causes capture performance degradation after AT command execution. This will be resolved in a future update.  
-> Works normally on macOS.
+### 5.2 Connected But No Messages
 
----
+**Unsupported chipset:**
+- Update to the latest EXE version (bundles latest scat upstream)
 
-## 6. Troubleshooting
+**DIAG session corruption (common on Samsung devices):**
+- **Reboot the device** (power off → on)
+- After reboot, reconnect USB → click **Connect**
 
-### 6.1 USB Device Not Detected
+**Only NR-RRC missing:**
+- scat.lua plugin issue. Reinstall the latest EXE.
 
-**Common:**
-- Check the USB cable (charge-only cables cannot transfer data)
-- Verify DIAG port is enabled (see section 2.1 Device Preparation)
-- Close other programs (QXDM, Wireshark, etc.) that may be holding the USB port
+### 5.3 "Waiting for server" Timeout on Launch
 
-**Windows:**
-- Ensure `run-wsl.bat` is run as Administrator
-- Verify usbipd is installed: run `usbipd list` in CMD
+Previous process terminated abnormally:
 
-### 6.2 Windows: BIOS Virtualization Not Enabled
+1. End all `DM-Viewer` processes in Task Manager
+2. Re-run the EXE
 
-**Symptom:** `HCS_E_HYPERV_NOT_INSTALLED` error during `setup-wsl.bat`
+If still failing:
+1. Run `wsl --shutdown` in an Administrator CMD
+2. Re-run the EXE
 
-**Solution:**
-1. Restart PC → Enter BIOS (F2 or Del)
-2. Enable Intel VT-x or AMD SVM
-3. Save and restart
+### 5.4 Port Not Visible in Device Manager After Disconnect
 
-Alternatively: Settings → System → Recovery → Advanced startup → UEFI Firmware Settings
+Normally, Disconnect returns the port. If not:
 
-**Verification:** Task Manager → Performance → CPU → Confirm "Virtualization: Enabled"
-
-### 6.3 Windows: Reboot Required During Setup
-
-**Symptom:** "A reboot is required" message after running `setup-wsl.bat`
-
-VirtualMachinePlatform is a Windows kernel feature that requires a reboot on first activation.  
-After rebooting, run `setup-wsl.bat` again to continue installation.
-
-### 6.4 Windows: Browser Cannot Connect to Page
-
-**Symptom:** Server shows "starting on port 8340" but browser displays `ERR_CONNECTION_REFUSED`
-
-**Cause:** WSL2 uses a virtual network, and Windows accesses localhost through WSL2 → Windows forwarding. If `run-wsl.bat` is executed again without stopping the previous server, this forwarding can temporarily break.
-
-**Solution:**
-
-1. Wait 30 seconds to 1 minute, then refresh the browser
-2. If still not working, run `wsl --shutdown` in an Administrator CMD, then re-run `run-wsl.bat`
-3. If that doesn't help, reboot Windows
-
-**Prevention:** Always use **Ctrl+C** to stop the server. Avoid closing the CMD window with the X button or running `run-wsl.bat` again while the server is still running.
-
-### 6.5 Windows: USB Port Not Released (Abnormal Termination)
-
-**Symptom:** After closing DM Viewer, COM ports are not visible in QXDM or other tools
-
-**Cause:** Closing the CMD window with the X button skips the USB unbind process, leaving the port attached to WSL
-
-**Solution:**
-
-1. Run `run-wsl.bat` again (it cleans up stale connections on startup and re-attaches)
-2. Confirm the port is recognized normally in WSL
-3. Exit with **Ctrl+C** → USB port is returned to Windows
-4. Verify COM port appears in QXDM or other tools
-
-**If the port still doesn't return (manual cleanup):**
 ```cmd
-usbipd detach --all
+:: Run in Administrator CMD
 usbipd unbind --all
 ```
-Run these commands in an Administrator CMD to release all USB bindings and return ports to Windows.
 
-> Always exit with **Ctrl+C** to prevent this issue.
+### 5.5 Connect Fails After Switching Devices
 
-### 6.5 NR RRC Messages Not Appearing (scat.lua Issue)
-
-**Symptom:** LTE-RRC messages appear but NR-RRC messages do not
-
-**Cause:** If scat.lua plugin is not loaded in tshark, NR RRC decoding is not possible
-
-**macOS fix:**
-```bash
-rm -rf .venv
-bash run.command
-```
-Recreating the venv reinstalls scat.lua automatically.
-
-**Windows fix:**
-Re-run `setup-wsl.bat` to reinstall scat.lua.
-
-### 6.6 DIAG Session Corruption (Messages Stop Arriving)
-
-**Symptom:** Messages suddenly stop arriving during capture (scat process is still running)
-
-**Cause:** Abnormal scat termination corrupted the device's DIAG session
-
-**Solution:**
-1. Click **Disconnect** in DM Viewer
-2. Reboot the smartphone (power off → on)
-3. Physically unplug and reconnect the USB cable
-4. Click **Connect** to reconnect
-
-### 6.7 scat Fails to Decode (Latest Chipset Not Supported)
-
-**Symptom:** Connection succeeds but no messages appear; scat stderr shows `Unknown NR RRC OTA Message packet version`
-
-**Cause:** Installed scat version does not support the latest Qualcomm chipset's pkt_ver
-
-**Solution:**
-```bash
-# macOS
-rm -rf .venv
-bash run.command
-
-# Windows
-# Re-run setup-wsl.bat (reinstalls scat from upstream git)
-```
-
-### 6.8 Port Conflict (UDP 4729 or TCP 8340)
-
-**Symptom:** "Cannot bind UDP 4729" or server fails to start
-
-**Cause:** Wireshark, a previous DM Viewer process, or other software is holding the port
-
-**macOS fix:**
-```bash
-lsof -ti:8340 | xargs kill -9
-lsof -ti:4729 | xargs kill -9
-bash run.command
-```
-
-**Windows:** `run-wsl.bat` automatically cleans up existing processes on startup.
+1. Check that the new device is visible in Device Manager
+2. If not, unplug and replug the USB cable
+3. If visible, try **Connect** again
 
 ---
 
-## 7. How to Exit
-
-### macOS
-Press **Ctrl+C** in the terminal
+## 6. How to Exit
 
 ### Windows (EXE)
-Close the browser tab and terminate the `DM-Viewer` process in Task Manager.  
-The next launch will automatically clean up previous processes.
 
-### Windows (source, run-wsl.bat)
-Press **Ctrl+C** in the CMD window (USB port is automatically returned to Windows)
+Terminate the `DM-Viewer` process in Task Manager.  
+The next launch automatically cleans up previous processes.
 
-> ❌ Do NOT close the CMD window with the X button. USB port release may fail.
+> Re-running the EXE will terminate the previous instance and start fresh.
+
+### macOS
+
+Press **Ctrl+C** in the terminal
 
 ---
 
 © 2026 JUSEOK AHN <ajs3013@lguplus.co.kr> All rights reserved.
-
----
-
-## Revision History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| v1.0.0 | 2026-06-04 | Initial release |
-| v1.1.0 | 2026-06-04 | Runtime USB management (Connect/Disconnect handles USB attach/detach) |
-| v1.1.0 | 2026-06-05 | Device switching support, AT command disabled on WSL, launcher wsl --shutdown based restart |
