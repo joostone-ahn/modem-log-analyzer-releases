@@ -1,6 +1,6 @@
 # DM Viewer 사용자 가이드
 
-**버전:** v1.0.0
+**버전:** v1.1.0
 
 ---
 
@@ -311,3 +311,12 @@ CMD 창에서 **Ctrl+C** (USB 포트가 자동으로 Windows에 반환됨)
 ---
 
 © 2026 JUSEOK AHN <ajs3013@lguplus.co.kr> All rights reserved.
+
+---
+
+## 개정이력
+
+| 버전 | 날짜 | 내용 |
+|------|------|------|
+| v1.0.0 | 2026-06-04 | 최초 배포 |
+| v1.1.0 | 2026-06-04 | 런타임 USB 연결 관리 (Connect/Disconnect 시 USB attach/detach) |

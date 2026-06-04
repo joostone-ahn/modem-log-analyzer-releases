@@ -1,6 +1,6 @@
 # DM Viewer User Guide
 
-**Version:** v1.0.0
+**Version:** v1.1.0
 
 ---
 
@@ -311,3 +311,12 @@ Press **Ctrl+C** in the CMD window (USB port is automatically returned to Window
 ---
 
 © 2026 JUSEOK AHN <ajs3013@lguplus.co.kr> All rights reserved.
+
+---
+
+## Revision History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v1.0.0 | 2026-06-04 | Initial release |
+| v1.1.0 | 2026-06-04 | Runtime USB management (Connect/Disconnect handles USB attach/detach) |
