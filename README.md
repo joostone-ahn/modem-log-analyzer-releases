@@ -51,13 +51,23 @@ Download the latest release from [Releases](https://github.com/joostone-ahn/dm-v
 
 > On first run, dependencies (tshark, scat, etc.) are installed automatically.
 
-### Windows (WSL)
+### Windows — File Mode (no WSL)
+
+**No prerequisites required** — all dependencies are installed automatically on first run.
+
+1. Download and extract `dm-viewer-vX.X.X-windows.zip`
+2. Double-click `run/start-filemode.bat`
+3. Browser opens at `http://localhost:8340`
+
+> First run automatically installs Python, Wireshark (tshark), git, scat, and scat.lua plugin via winget. A script restart may be required after installation.
+
+### Windows — USB Mode (WSL)
 
 **Prerequisites**: Windows 10/11, Administrator access, BIOS virtualization enabled
 
 1. Download and extract `dm-viewer-vX.X.X-windows.zip`
-2. Run `run/setup-wsl.bat` as Administrator (one-time setup)
-3. Run `run/run-wsl.bat` as Administrator (every time)
+2. Double-click `run/setup-wsl.bat` (one-time setup, auto-elevates to admin)
+3. Double-click `run/start-usbmode.bat` (every time, auto-elevates to admin)
 4. Browser opens at `http://localhost:8340`
 
 > First-time setup requires a reboot. After reboot, run `setup-wsl.bat` again to complete.

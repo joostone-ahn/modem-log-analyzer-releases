@@ -38,9 +38,25 @@
 
 ### 1.2 Windows
 
+#### File Mode (WSL 불필요)
+
+**사전 요구사항 없음** — 첫 실행 시 모든 의존성이 자동으로 설치됩니다.
+
+`start-filemode.bat`을 더블클릭합니다.
+
+첫 실행 시 Python, Wireshark (tshark), git, scat, scat.lua 플러그인이 winget을 통해 자동 설치됩니다.  
+설치 후 스크립트 재시작이 필요할 수 있습니다.  
+브라우저가 자동으로 열립니다: http://localhost:8340
+
+> USB 실시간 캡처는 이 모드에서 사용할 수 없습니다. 파일 로드만 지원됩니다.
+
+#### USB Mode (WSL 필요)
+
+**사전 요구사항:** Windows 10/11, 관리자 권한, BIOS 가상화 활성화
+
 **Step 1: 초기 설치 (1회)**
 
-`setup-wsl.bat`을 관리자 권한으로 실행합니다 (우클릭 → 관리자 권한으로 실행)
+`setup-wsl.bat`을 더블클릭합니다 (자동으로 관리자 권한을 요청합니다)
 
 자동 설치 항목:
 - WSL2 + Ubuntu
@@ -51,7 +67,7 @@
 
 **Step 2: 실행 (매번)**
 
-`run-wsl.bat`을 관리자 권한으로 실행합니다
+`start-usbmode.bat`을 더블클릭합니다 (자동으로 관리자 권한을 요청합니다)
 
 자동으로 USB 디바이스를 WSL에 연결하고 서버를 시작합니다.  
 브라우저가 자동으로 열립니다: http://localhost:8340

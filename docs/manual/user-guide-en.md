@@ -38,9 +38,25 @@
 
 ### 1.2 Windows
 
+#### File Mode (no WSL required)
+
+**No prerequisites required** — all dependencies are installed automatically on first run.
+
+Double-click `start-filemode.bat`.
+
+On first run, Python, Wireshark (tshark), git, scat, and scat.lua plugin are automatically installed via winget.  
+A script restart may be required after installation.  
+The browser opens automatically: http://localhost:8340
+
+> USB real-time capture is not available in this mode. File loading only.
+
+#### USB Mode (WSL required)
+
+**Prerequisites:** Windows 10/11, Administrator access, BIOS virtualization enabled
+
 **Step 1: Initial Setup (one-time)**
 
-Run `setup-wsl.bat` as Administrator (right-click → Run as administrator)
+Double-click `setup-wsl.bat` (auto-elevates to administrator)
 
 Automatically installs:
 - WSL2 + Ubuntu
@@ -51,7 +67,7 @@ Automatically installs:
 
 **Step 2: Launch (every time)**
 
-Run `run-wsl.bat` as Administrator
+Double-click `start-usbmode.bat` (auto-elevates to administrator)
 
 This connects the USB device to WSL and starts the server automatically.  
 The browser opens automatically: http://localhost:8340
