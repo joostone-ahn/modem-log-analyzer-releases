@@ -18,64 +18,14 @@
 
 ## 1. 프로그램 실행
 
-### 1.1 macOS
-
-1. `run.command` 파일을 더블클릭합니다
-2. 터미널이 열리며 자동으로 환경을 구성합니다
+1. [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)에서 `DM-Viewer.exe`를 다운로드합니다
+2. `DM-Viewer.exe`를 더블클릭합니다
 3. 브라우저가 자동으로 열립니다: http://localhost:8340
 
-> 터미널에서 실행하려면: `bash run.command`
+> **최초 실행 시:** WSL2, usbipd-win, scat, tshark가 자동 설치됩니다. 재부팅이 필요할 수 있습니다.  
+> **이후 실행:** 즉시 시작됩니다. USB 디바이스가 감지되면 자동으로 연결됩니다.
 
-**첫 실행 시 자동 설치:**
-- tshark, libusb (Homebrew)
-- Python 가상환경 + 의존 패키지
-- scat (upstream git)
-- scat.lua (Wireshark 플러그인)
-
-**사전 요구사항:**
-- [Homebrew](https://brew.sh)
-- Python 3.10+
-
-### 1.2 Windows
-
-#### File Mode (WSL 불필요)
-
-**사전 요구사항 없음** — 첫 실행 시 모든 의존성이 자동으로 설치됩니다.
-
-`start-filemode.bat`을 더블클릭합니다.
-
-첫 실행 시 Python, Wireshark (tshark), git, scat, scat.lua 플러그인이 winget을 통해 자동 설치됩니다.  
-설치 후 스크립트 재시작이 필요할 수 있습니다.  
-브라우저가 자동으로 열립니다: http://localhost:8340
-
-> USB 실시간 캡처는 이 모드에서 사용할 수 없습니다. 파일 로드만 지원됩니다.
-
-#### USB Mode (WSL 필요)
-
-**사전 요구사항:** Windows 10/11, 관리자 권한, BIOS 가상화 활성화
-
-**Step 1: 초기 설치 (1회)**
-
-`setup-wsl.bat`을 더블클릭합니다 (자동으로 관리자 권한을 요청합니다)
-
-자동 설치 항목:
-- WSL2 + Ubuntu
-- usbipd-win
-- WSL 내부 환경 (Python, tshark, scat 등)
-
-> 첫 설치 시 재부팅이 필요합니다. 재부팅 후 `setup-wsl.bat`을 다시 실행하세요.
-
-**Step 2: 실행 (매번)**
-
-`start-usbmode.bat`을 더블클릭합니다 (자동으로 관리자 권한을 요청합니다)
-
-자동으로 USB 디바이스를 WSL에 연결하고 서버를 시작합니다.  
-브라우저가 자동으로 열립니다: http://localhost:8340
-
-**사전 요구사항:**
-- Windows 10/11
-- 관리자 권한
-- BIOS 가상화(VT-x/AMD-V) 활성화
+⚠️ **주의:** 최초 실행 시 exe 옆에 `dm-viewer-linux` 파일이 자동 생성됩니다. 이 파일을 삭제하지 마세요.
 
 ---
 

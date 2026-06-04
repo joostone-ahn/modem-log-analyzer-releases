@@ -29,7 +29,7 @@ This pipeline enables automated compliance checks, PHY-layer visualization from 
 
 ## 🌐 Online Demo
 
-**[Try Online Demo](https://huggingface.co/spaces/Joostone/dm-viewer)**
+**[Try Online Demo](https://dm-viewer.onrender.com)**
 
 > Note: The demo runs in File Mode only. Upload .pcap or DM log files to decode. USB capture is available in the local version.
 
@@ -41,36 +41,12 @@ This pipeline enables automated compliance checks, PHY-layer visualization from 
 
 Download the latest release from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases).
 
-### macOS
+1. Download `DM-Viewer-vX.X.X.exe`
+2. Double-click to run
 
-**Prerequisites**: [Homebrew](https://brew.sh), Python 3.10+
-
-1. Download and extract `dm-viewer-vX.X.X-macos.zip`
-2. Double-click `run/run.command` (or run `bash run/run.command` in terminal)
-3. Browser opens at `http://localhost:8340`
-
-> On first run, dependencies (tshark, scat, etc.) are installed automatically.
-
-### Windows — File Mode (no WSL)
-
-**No prerequisites required** — all dependencies are installed automatically on first run.
-
-1. Download and extract `dm-viewer-vX.X.X-windows.zip`
-2. Double-click `run/start-filemode.bat`
-3. Browser opens at `http://localhost:8340`
-
-> First run automatically installs Python, Wireshark (tshark), git, scat, and scat.lua plugin via winget. A script restart may be required after installation.
-
-### Windows — USB Mode (WSL)
-
-**Prerequisites**: Windows 10/11, Administrator access, BIOS virtualization enabled
-
-1. Download and extract `dm-viewer-vX.X.X-windows.zip`
-2. Double-click `run/setup-wsl.bat` (one-time setup, auto-elevates to admin)
-3. Double-click `run/start-usbmode.bat` (every time, auto-elevates to admin)
-4. Browser opens at `http://localhost:8340`
-
-> First-time setup requires a reboot. After reboot, run `setup-wsl.bat` again to complete.
+> **First run:** WSL2, usbipd, scat, tshark are installed automatically (may require reboot).  
+> **Subsequent runs:** Instant startup.  
+> A `dm-viewer-linux` file is created next to the exe — do not delete it.
 
 ---
 

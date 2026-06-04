@@ -18,64 +18,14 @@
 
 ## 1. Running the Program
 
-### 1.1 macOS
-
-1. Double-click `run.command`
-2. A terminal window opens and configures the environment automatically
+1. Download `DM-Viewer.exe` from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)
+2. Double-click `DM-Viewer.exe`
 3. The browser opens automatically: http://localhost:8340
 
-> To run from terminal: `bash run.command`
+> **First run:** WSL2, usbipd-win, scat, tshark are installed automatically. A reboot may be required.  
+> **Subsequent runs:** Instant startup. USB devices are auto-detected and attached.
 
-**Installed automatically on first run:**
-- tshark, libusb (via Homebrew)
-- Python virtual environment + dependencies
-- scat (from upstream git)
-- scat.lua (Wireshark plugin)
-
-**Prerequisites:**
-- [Homebrew](https://brew.sh)
-- Python 3.10+
-
-### 1.2 Windows
-
-#### File Mode (no WSL required)
-
-**No prerequisites required** — all dependencies are installed automatically on first run.
-
-Double-click `start-filemode.bat`.
-
-On first run, Python, Wireshark (tshark), git, scat, and scat.lua plugin are automatically installed via winget.  
-A script restart may be required after installation.  
-The browser opens automatically: http://localhost:8340
-
-> USB real-time capture is not available in this mode. File loading only.
-
-#### USB Mode (WSL required)
-
-**Prerequisites:** Windows 10/11, Administrator access, BIOS virtualization enabled
-
-**Step 1: Initial Setup (one-time)**
-
-Double-click `setup-wsl.bat` (auto-elevates to administrator)
-
-Automatically installs:
-- WSL2 + Ubuntu
-- usbipd-win
-- Internal WSL environment (Python, tshark, scat, etc.)
-
-> A reboot is required on first installation. After rebooting, run `setup-wsl.bat` again.
-
-**Step 2: Launch (every time)**
-
-Double-click `start-usbmode.bat` (auto-elevates to administrator)
-
-This connects the USB device to WSL and starts the server automatically.  
-The browser opens automatically: http://localhost:8340
-
-**Prerequisites:**
-- Windows 10/11
-- Administrator access
-- BIOS virtualization (VT-x/AMD-V) enabled
+⚠️ **Note:** On first run, a `dm-viewer-linux` file is created next to the exe. Do not delete this file.
 
 ---
 
