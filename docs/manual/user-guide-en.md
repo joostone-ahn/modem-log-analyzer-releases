@@ -23,7 +23,7 @@
 3. The browser opens automatically: http://localhost:8340
 
 > **First run:** WSL2, usbipd-win, scat, tshark are installed automatically. A reboot may be required.  
-> **Subsequent runs:** Instant startup. USB devices are auto-detected and attached.
+> **Subsequent runs:** Instant startup.
 
 ⚠️ **Note:** On first run, a `dm-viewer-linux` file is created next to the exe. Do not delete this file.
 
@@ -77,7 +77,16 @@ Before running `run-wsl.bat`, verify that the USB device is recognized in Window
 
 ### 2.5 Disconnection
 
-Click **Disconnect** to stop the capture.
+Click **Disconnect** to stop the capture and return the USB device to Windows.
+
+### 2.6 Device Switching
+
+1. Click **Disconnect** → USB returns to Windows (verify port in Device Manager)
+2. Unplug the current device and connect a new one
+3. Verify the new device port appears in Device Manager
+4. Click **Connect** → Capture starts on the new device
+
+> Device switching is possible without restarting the app.
 
 ---
 
@@ -165,6 +174,9 @@ During capture, click **Power Off** to send `AT+CFUN=0` (modem RF off).
 The button changes to **Power On** — click it to send `AT+CFUN=1` (modem RF on).
 
 This allows you to capture the full Attach/Registration sequence from the beginning.
+
+> ⚠️ **This feature is currently disabled on Windows (EXE).** A technical limitation causes capture performance degradation after AT command execution. This will be resolved in a future update.  
+> Works normally on macOS.
 
 ---
 
@@ -303,7 +315,11 @@ bash run.command
 ### macOS
 Press **Ctrl+C** in the terminal
 
-### Windows
+### Windows (EXE)
+Close the browser tab and terminate the `DM-Viewer` process in Task Manager.  
+The next launch will automatically clean up previous processes.
+
+### Windows (source, run-wsl.bat)
 Press **Ctrl+C** in the CMD window (USB port is automatically returned to Windows)
 
 > ❌ Do NOT close the CMD window with the X button. USB port release may fail.
@@ -320,3 +336,4 @@ Press **Ctrl+C** in the CMD window (USB port is automatically returned to Window
 |---------|------|---------|
 | v1.0.0 | 2026-06-04 | Initial release |
 | v1.1.0 | 2026-06-04 | Runtime USB management (Connect/Disconnect handles USB attach/detach) |
+| v1.1.0 | 2026-06-05 | Device switching support, AT command disabled on WSL, launcher wsl --shutdown based restart |
