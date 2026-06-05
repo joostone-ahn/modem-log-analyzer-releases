@@ -57,17 +57,6 @@ Download the latest release from [Releases](https://github.com/joostone-ahn/mode
 
 ---
 
-## 📋 Change History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| v1.2.2 | 2026-06-05 | Fix setup-wsl.bat Ubuntu detection (UTF-16), integrate missing WSL deps, fix same-mode re-click bug |
-| v1.2.1 | 2026-06-05 | Fix mode restore bug on page load |
-| v1.2.0 | 2026-06-05 | Renamed to Modem Log Analyzer, UX: custom modal dialog system, mode switch save prompt, state management fixes |
-| v1.0.0 | 2026-06-03 | Initial release — real-time USB capture, file load, AT command, cross-platform (macOS / Windows WSL) |
-
----
-
 ## 👤 Author
 
 **JUSEOK AHN (안주석)**  
