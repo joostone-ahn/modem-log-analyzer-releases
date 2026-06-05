@@ -1,4 +1,4 @@
-# 📡 DM Viewer
+# 📡 Modem Log Analyzer
 
 A web-based real-time DIAG log viewer for NR/LTE RRC and NAS messages.
 
@@ -8,9 +8,9 @@ A web-based real-time DIAG log viewer for NR/LTE RRC and NAS messages.
 
 ## 💡 Why This Tool?
 
-DM Viewer connects directly to USB DIAG ports on macOS and Windows (WSL), capturing and decoding NR/LTE RRC and NAS messages in real-time in your browser. Saved log files (.pcap, .hdf, .qmdl, .dlf) can also be loaded and decoded.
+Modem Log Analyzer connects directly to USB DIAG ports on macOS and Windows (WSL), capturing and decoding NR/LTE RRC and NAS messages in real-time in your browser. Saved log files (.pcap, .hdf, .qmdl, .dlf) can also be loaded and decoded.
 
-Log analysis has always been manual — read messages, check against spec, make a judgment. Existing tools offer text export or copy-paste, but there's always an extra step before automation is possible. DM Viewer eliminates that step with a single pipeline — capture, decode, analyze — that connects directly to automation.
+Log analysis has always been manual — read messages, check against spec, make a judgment. Existing tools offer text export or copy-paste, but there's always an extra step before automation is possible. Modem Log Analyzer eliminates that step with a single pipeline — capture, decode, analyze — that connects directly to automation.
 
 This pipeline enables automated compliance checks, PHY-layer visualization from raw config, and pass/fail logic for test procedures. Currently it covers RCC and NAS, but the plan is to expand into radio measurements, throughput, and RF conditions — enabling a much wider range of automated field analysis.
 
@@ -29,31 +29,31 @@ This pipeline enables automated compliance checks, PHY-layer visualization from 
 
 ## 🌐 Online Demo
 
-**[Try Online Demo](https://dm-viewer.onrender.com)**
+**[Try Online Demo](https://modem-log-analyzer.onrender.com)**
 
 > Note: The demo runs in File Mode only. Upload .pcap or DM log files to decode. USB capture is available in the local version.
 
-![DM Viewer](docs/images/screenshot_dm_viewer.png)
+![Modem Log Analyzer](docs/images/screenshot_modem_log_analyzer.png)
 
 ---
 
 ## 🚀 Quick Start
 
-Download the latest release from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases).
+Download the latest release from [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases).
 
-1. Download `DM-Viewer-vX.X.X.exe`
+1. Download `Modem-Log-Analyzer-vX.X.X.exe`
 2. Double-click to run
 
 > **First run:** WSL2, usbipd, scat, tshark are installed automatically (may require reboot).  
 > **Subsequent runs:** Instant startup.  
-> A `dm-viewer-linux` file is created next to the exe — do not delete it.
+> A `modem-log-analyzer-linux` file is created next to the exe — do not delete it.
 
 ---
 
 ## 📖 Documentation
 
-- [User Guide (한국어)](https://github.com/joostone-ahn/dm-viewer-releases/blob/main/docs/manual/user-guide-kr.md)
-- [User Guide (English)](https://github.com/joostone-ahn/dm-viewer-releases/blob/main/docs/manual/user-guide-en.md)
+- [User Guide (한국어)](https://github.com/joostone-ahn/modem-log-analyzer-releases/blob/main/docs/manual/user-guide-kr.md)
+- [User Guide (English)](https://github.com/joostone-ahn/modem-log-analyzer-releases/blob/main/docs/manual/user-guide-en.md)
 
 ---
 
@@ -61,6 +61,7 @@ Download the latest release from [Releases](https://github.com/joostone-ahn/dm-v
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v1.2.0 | 2026-06-05 | Renamed to Modem Log Analyzer, UX: custom modal dialog system, mode switch save prompt, state management fixes |
 | v1.0.0 | 2026-06-03 | Initial release — real-time USB capture, file load, AT command, cross-platform (macOS / Windows WSL) |
 
 ---

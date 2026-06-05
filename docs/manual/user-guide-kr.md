@@ -1,6 +1,6 @@
-# DM Viewer 사용자 가이드
+# Modem Log Analyzer 사용자 가이드
 
-**버전:** v1.1.0
+**버전:** v1.2.0
 
 ---
 
@@ -19,7 +19,7 @@
 
 ### Windows (EXE)
 
-1. [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)에서 최신 `DM-Viewer-vX.X.X.exe`를 다운로드합니다
+1. [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases)에서 최신 `Modem-Log-Analyzer-vX.X.X.exe`를 다운로드합니다
 2. EXE를 **관리자 권한으로 실행**합니다 (우클릭 → 관리자 권한으로 실행 권장)
 3. 스플래시 화면이 표시되며 환경을 자동 설정합니다
 4. 완료 후 브라우저가 자동으로 열립니다: http://localhost:8340
@@ -41,7 +41,7 @@
 - WSL 초기화 후 서버를 시작합니다 (약 10초)
 - 이전 실행이 남아있으면 WSL을 리셋 후 재시작합니다 ("Resetting WSL..." 10~15초 소요)
 
-⚠️ 최초 실행 시 EXE 옆에 `dm-viewer-linux` 파일이 생성됩니다. 이 파일을 삭제하지 마세요.
+⚠️ 최초 실행 시 EXE 옆에 `modem-log-analyzer-linux` 파일이 생성됩니다. 이 파일을 삭제하지 마세요.
 
 ### macOS (Private 배포)
 
@@ -50,10 +50,10 @@ macOS 버전은 별도 요청을 통해 제공됩니다.
 > **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
 
 압축 파일 수령 후:
-1. `dm-viewer-vX.X.X-macos.zip` 압축을 해제합니다
+1. `modem-log-analyzer-vX.X.X-macos.zip` 압축을 해제합니다
 2. 터미널을 열고 압축 해제된 폴더로 이동한 후 실행 권한을 부여합니다:
    ```
-   cd dm-viewer-vX.X.X-macos
+   cd modem-log-analyzer-vX.X.X-macos
    chmod +x run.command
    ```
 3. `run.command`를 더블클릭합니다 (최초 실행 시 venv + 의존성 자동 설치)
@@ -123,6 +123,20 @@ macOS 버전은 별도 요청을 통해 제공됩니다.
 - 캡처가 자동 중지됩니다
 - **Connect** 버튼이 다시 나타납니다
 - 단말을 다시 연결하고 **Connect**를 누르면 됩니다
+
+### 2.7 모드 전환 (USB ↔ File)
+
+상단 툴바의 **USB Mode / File Mode** 토글로 전환합니다.
+
+| 전환 방향 | 조건 | 동작 |
+|-----------|------|------|
+| USB(캡처 중) → File | 캡처 실행 중 | 차단됨 — 먼저 Disconnect 필요 |
+| USB(데이터 有) → File | 데이터 존재 | 저장 다이얼로그 표시 (Save .pcap / Don't Save / Cancel) |
+| USB(빈 상태) → File | 데이터 없음 | 즉시 전환 |
+| File(결과 有) → USB | 파싱 결과 표시 중 | 확인 다이얼로그 표시 (Continue / Cancel) |
+| File(빈 상태) → USB | 데이터 없음 | 즉시 전환 |
+
+> 💡 모드 전환 시 **Save**를 선택하면 캡처 로그가 .pcap으로 다운로드됩니다.
 
 ---
 
@@ -232,7 +246,7 @@ macOS 버전은 별도 요청을 통해 제공됩니다.
 
 이전 프로세스가 비정상 종료된 경우:
 
-1. 작업 관리자에서 모든 `DM-Viewer` 프로세스 종료
+1. 작업 관리자에서 모든 `Modem-Log-Analyzer` 프로세스 종료
 2. EXE 재실행
 
 그래도 안 되면:
@@ -260,7 +274,7 @@ usbipd unbind --all
 
 ### Windows (EXE)
 
-작업 관리자에서 `DM-Viewer` 프로세스를 종료합니다.  
+작업 관리자에서 `Modem-Log-Analyzer` 프로세스를 종료합니다.  
 다음 실행 시 이전 프로세스가 자동으로 정리됩니다.
 
 > EXE를 다시 실행하면 이전 인스턴스를 자동으로 종료하고 새로 시작합니다.

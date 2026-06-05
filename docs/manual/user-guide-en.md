@@ -1,6 +1,6 @@
-# DM Viewer User Guide
+# Modem Log Analyzer User Guide
 
-**Version:** v1.1.0
+**Version:** v1.2.0
 
 ---
 
@@ -19,7 +19,7 @@
 
 ### Windows (EXE)
 
-1. Download the latest `DM-Viewer-vX.X.X.exe` from [Releases](https://github.com/joostone-ahn/dm-viewer-releases/releases)
+1. Download the latest `Modem-Log-Analyzer-vX.X.X.exe` from [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases)
 2. **Run as Administrator** (right-click → Run as administrator recommended)
 3. A splash screen appears while the environment is configured
 4. The browser opens automatically: http://localhost:8340
@@ -41,7 +41,7 @@ On a fresh PC, run `setup-wsl.bat` before using the EXE:
 - WSL reset + server start (approx. 10 seconds)
 - If a previous instance exists, it is automatically terminated and restarted
 
-⚠️ **Note:** On first run, a `dm-viewer-linux` file is created next to the exe. Do not delete this file.
+⚠️ **Note:** On first run, a `modem-log-analyzer-linux` file is created next to the exe. Do not delete this file.
 
 ### macOS (Private Distribution)
 
@@ -50,10 +50,10 @@ The macOS version is available upon request.
 > **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
 
 After receiving the archive:
-1. Unzip `dm-viewer-vX.X.X-macos.zip`
+1. Unzip `modem-log-analyzer-vX.X.X-macos.zip`
 2. Open Terminal, navigate to the extracted folder, and grant execute permission:
    ```
-   cd dm-viewer-vX.X.X-macos
+   cd modem-log-analyzer-vX.X.X-macos
    chmod +x run.command
    ```
 3. Double-click `run.command` (first run installs venv + dependencies automatically)
@@ -123,6 +123,20 @@ If USB is physically unplugged during capture:
 - Capture stops automatically
 - **Connect** button reappears
 - Reconnect the device and click **Connect** to resume
+
+### 2.7 Mode Switching (USB ↔ File)
+
+Use the **USB Mode / File Mode** toggle in the toolbar.
+
+| Direction | Condition | Behavior |
+|-----------|-----------|----------|
+| USB (capturing) → File | Capture running | Blocked — disconnect first |
+| USB (data exists) → File | Data present | Save dialog shown (Save .pcap / Don't Save / Cancel) |
+| USB (empty) → File | No data | Immediate switch |
+| File (results shown) → USB | Parsed data displayed | Confirm dialog shown (Continue / Cancel) |
+| File (empty) → USB | No data | Immediate switch |
+
+> 💡 Selecting **Save** on mode switch downloads the captured log as .pcap.
 
 ---
 
@@ -232,7 +246,7 @@ Click a message to display the full decoding tree on the right.
 
 Previous process terminated abnormally:
 
-1. End all `DM-Viewer` processes in Task Manager
+1. End all `Modem-Log-Analyzer` processes in Task Manager
 2. Re-run the EXE
 
 If still failing:
@@ -260,7 +274,7 @@ usbipd unbind --all
 
 ### Windows (EXE)
 
-Terminate the `DM-Viewer` process in Task Manager.  
+Terminate the `Modem-Log-Analyzer` process in Task Manager.  
 The next launch automatically cleans up previous processes.
 
 > Re-running the EXE will terminate the previous instance and start fresh.
