@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.2.2
+**Version:** v1.3.0
 
 ---
 
@@ -272,16 +272,19 @@ usbipd unbind --all
 
 ## 6. How to Exit
 
-### Windows (EXE)
+Click the **⏻ (shutdown) button** at the top-right of the browser toolbar.
 
-Terminate the `Modem-Log-Analyzer` process in Task Manager.  
-The next launch automatically cleans up previous processes.
+1. A confirmation dialog appears: "Shutdown the server and close the application?"
+2. Click **Shutdown**:
+   - If capturing, capture stops automatically
+   - USB device is returned to Windows (detach + unbind)
+   - Server is terminated
+3. The browser status changes to red ● "Server stopped"
+4. Previously captured data remains viewable in the browser
 
-> Re-running the EXE will terminate the previous instance and start fresh.
+> **Note:** You can also terminate the process via Task Manager. The browser will detect the server shutdown within 5 seconds and display the same "Server stopped" state.
 
-### macOS
-
-Press **Ctrl+C** in the terminal
+> **Restart:** To use again after shutdown, re-run the EXE.
 
 ---
 
