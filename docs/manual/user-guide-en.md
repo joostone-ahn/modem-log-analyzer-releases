@@ -24,22 +24,42 @@
 3. A splash screen appears while the environment is configured
 4. The browser opens automatically: http://localhost:8340
 
-> **First run:** WSL2, usbipd-win, scat, tshark are installed automatically. A reboot may be required.  
-> **Subsequent runs:** WSL reset + server start (approx. 10 seconds).  
-> **Re-launch while running:** If a previous instance exists, WSL is reset. The "Resetting WSL..." step may take 10–15 seconds.
+#### First-time Setup (WSL not installed)
+
+On a fresh PC, run `setup-wsl.bat` before using the EXE:
+
+1. Download `setup-wsl.bat` from the Release page
+2. Right-click → **Run as administrator**
+3. WSL2 + Ubuntu installation completes → **reboot** when prompted
+4. After reboot, run `setup-wsl.bat` **one more time** → remaining packages install
+5. "Setup complete!" message confirms readiness → now run the EXE
+
+> ⚠️ WSL is not active until after the reboot. You must reboot and re-run the bat.
+
+#### Subsequent Runs
+
+- WSL reset + server start (approx. 10 seconds)
+- If a previous instance exists, it is automatically terminated and restarted
 
 ⚠️ **Note:** On first run, a `dm-viewer-linux` file is created next to the exe. Do not delete this file.
 
 ### macOS (Private Distribution)
 
-The macOS version (ZIP) is available upon request.
+The macOS version is available upon request.
 
 > **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
 
-After receiving the ZIP file:
-1. Extract the archive
-2. Double-click `run/run.command` (first run installs venv + dependencies automatically)
+After receiving the archive:
+1. Extract `dm-viewer-vX.X.X-macos.tar.gz`
+2. Double-click `run.command` (first run installs venv + dependencies automatically)
 3. The browser opens automatically: http://localhost:8340
+
+> **⚠️ If you see a popup saying "run.command cannot be opened because it does not have execute permission":**  
+> Open Terminal, navigate to the extracted folder, and run:
+> ```
+> chmod +x run.command
+> ```
+> Then double-click `run.command` again.
 
 ---
 
