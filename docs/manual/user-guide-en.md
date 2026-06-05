@@ -50,16 +50,14 @@ The macOS version is available upon request.
 > **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
 
 After receiving the archive:
-1. Extract `dm-viewer-vX.X.X-macos.tar.gz`
-2. Double-click `run.command` (first run installs venv + dependencies automatically)
-3. The browser opens automatically: http://localhost:8340
-
-> **⚠️ If you see a popup saying "run.command cannot be opened because it does not have execute permission":**  
-> Open Terminal, navigate to the extracted folder, and run:
-> ```
-> chmod +x run.command
-> ```
-> Then double-click `run.command` again.
+1. Unzip `dm-viewer-vX.X.X-macos.zip`
+2. Open Terminal, navigate to the extracted folder, and grant execute permission:
+   ```
+   cd dm-viewer-vX.X.X-macos
+   chmod +x run.command
+   ```
+3. Double-click `run.command` (first run installs venv + dependencies automatically)
+4. The browser opens automatically: http://localhost:8340
 
 ---
 

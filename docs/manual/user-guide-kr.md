@@ -50,16 +50,14 @@ macOS 버전은 별도 요청을 통해 제공됩니다.
 > **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
 
 압축 파일 수령 후:
-1. `dm-viewer-vX.X.X-macos.tar.gz` 압축을 해제합니다
-2. `run.command`를 더블클릭합니다 (최초 실행 시 venv + 의존성 자동 설치)
-3. 브라우저가 자동으로 열립니다: http://localhost:8340
-
-> **⚠️ "접근 권한이 없기 때문에 'run.command' 파일을 실행할 수 없습니다" 팝업이 뜨는 경우:**  
-> 터미널을 열고 압축 해제된 폴더로 이동한 후 다음 명령을 실행하세요:
-> ```
-> chmod +x run.command
-> ```
-> 이후 다시 더블클릭하면 정상 실행됩니다.
+1. `dm-viewer-vX.X.X-macos.zip` 압축을 해제합니다
+2. 터미널을 열고 압축 해제된 폴더로 이동한 후 실행 권한을 부여합니다:
+   ```
+   cd dm-viewer-vX.X.X-macos
+   chmod +x run.command
+   ```
+3. `run.command`를 더블클릭합니다 (최초 실행 시 venv + 의존성 자동 설치)
+4. 브라우저가 자동으로 열립니다: http://localhost:8340
 
 ---
 
