@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.4.1
+**Version:** v1.5.0
 
 ---
 
@@ -22,7 +22,7 @@
 1. Download the latest `Modem-Log-Analyzer-vX.X.X.exe` from [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases)
 2. **Run as Administrator** (right-click → Run as administrator recommended)
 3. A splash screen appears while the environment is configured
-4. The browser opens automatically: http://localhost:8340
+4. The app window opens automatically
 
 #### First-time Setup (WSL not installed)
 
@@ -56,8 +56,10 @@ After receiving the archive:
    cd modem-log-analyzer-vX.X.X-macos
    chmod +x run.command
    ```
-3. Double-click `run.command` (first run installs venv + dependencies automatically)
-4. The browser opens automatically: http://localhost:8340
+3. Double-click `Modem Log Analyzer.app` (or double-click `run-dev.command` for development mode)
+4. The app window opens automatically
+
+> 💡 You can pin the `.app` to Dock for quick access.
 
 ---
 
@@ -80,7 +82,7 @@ The smartphone must expose a diagnostic (DIAG) port over USB.
 
 1. Connect the device to PC via USB
 2. **Windows:** Verify the port appears in Device Manager
-3. Click the **Connect** button in the browser
+3. Click the **Connect** button in the app
 4. Device detection → USB transfer to WSL → scat start (approx. 8 seconds)
 5. Status indicator turns green ● and messages appear in real time
 
@@ -295,20 +297,20 @@ If you encounter issues, check the `modem-log-analyzer.log` file next to the EXE
 
 ## 6. How to Exit
 
-Click the **⏻ (shutdown) button** at the top-right of the browser toolbar.
+Close the app window to exit the program.
 
-1. A confirmation dialog appears: "Shutdown the server and close the application?"
-2. Click **Shutdown**:
-   - If capturing, capture stops automatically
-   - USB device is returned to Windows (detach + unbind)
-   - Server is terminated
-3. The browser status changes to red ● "Server stopped"
-4. Previously captured data remains viewable in the browser
+- **macOS:** `⌘Q` or click the close button (red ●)
+- **Windows:** Click the **X** button at the top-right or press `Alt+F4`
 
-> **Note:** You can also terminate the process via Task Manager. The browser will detect the server shutdown within 5 seconds and display the same "Server stopped" state.
+When the window is closed:
+1. If capturing, capture stops automatically
+2. USB device is returned to Windows (detach + unbind)
+3. Server is terminated
 
-> **Restart:** To use again after shutdown, re-run the EXE.
+> **Note:** On Windows, you can also terminate the process via Task Manager.
+
+> **Restart:** To use again after exit, re-run the EXE (Windows) or .app (macOS).
 
 ---
 
-© 2026 JUSEOK AHN <ajs3013@lguplus.co.kr> All rights reserved.
+**© 2026 JUSEOK AHN <ajs3013@lguplus.co.kr>. Licensed under GPLv2.**
