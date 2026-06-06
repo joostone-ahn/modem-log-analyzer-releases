@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.3.0
+**Version:** v1.4.0
 
 ---
 
@@ -257,12 +257,35 @@ If still failing:
 
 Normally, Disconnect returns the port. If not:
 
+**Method 1: Use `reset-usb.bat` (recommended)**
+
+Run `reset-usb.bat` from the Release package **as Administrator**.
+- Returns all USB devices from WSL back to Windows
+- Also shuts down WSL for a clean state
+
+**Method 2: Manual command**
+
 ```cmd
 :: Run in Administrator CMD
 usbipd unbind --all
 ```
 
-### 5.5 Connect Fails After Switching Devices
+### 5.5 USB Recovery After Abnormal Exit
+
+If the EXE was force-closed or the PC shut down unexpectedly, USB devices may remain attached to WSL and unavailable to other Windows programs (QXDM, etc.).
+
+**Run `reset-usb.bat` as Administrator** to recover immediately.
+
+> 💡 `reset-usb.bat` is available on the Release page alongside the EXE.
+
+### 5.6 Collecting Debug Logs
+
+If you encounter issues, check the `modem-log-analyzer.log` file next to the EXE.
+- Created fresh on each launch (previous log is overwritten)
+- Records all internal operations: server start, USB connection, capture, errors
+- Please include this file when reporting issues
+
+### 5.7 Connect Fails After Switching Devices
 
 1. Check that the new device is visible in Device Manager
 2. If not, unplug and replug the USB cable
