@@ -1,6 +1,6 @@
 # Modem Log Analyzer 사용자 가이드
 
-**버전:** v1.5.0
+**버전:** v1.6.0
 
 ---
 
@@ -43,21 +43,20 @@
 
 ⚠️ 최초 실행 시 EXE 옆에 `modem-log-analyzer-linux` 파일이 생성됩니다. 이 파일을 삭제하지 마세요.
 
-### macOS (Private 배포)
+### macOS (DMG)
 
-macOS 버전은 별도 요청을 통해 제공됩니다.
+> ⚠️ 사전 요구사항: [Homebrew](https://brew.sh)가 설치되어 있어야 합니다. 최초 실행 시 필요한 의존성(Wireshark, libusb 등)을 자동 설치합니다.
 
-> **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
+1. [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases)에서 최신 `Modem-Log-Analyzer-vX.X.X-macOS.dmg`를 다운로드합니다
+2. DMG 파일을 더블클릭하여 마운트합니다
+3. `Modem Log Analyzer.app`을 Applications 폴더로 드래그합니다 (또는 원하는 위치에 복사)
+4. 최초 실행 시 macOS Gatekeeper 경고가 표시됩니다:
+   - `.app`을 **우클릭** → **열기** → **열기** 클릭
+   - 이후 실행부터는 더블클릭으로 바로 열립니다
+5. 스플래시 화면이 표시되며 의존성을 확인/설치합니다 (최초 1회, 2~3분 소요)
+6. 준비 완료 후 앱 윈도우가 자동으로 열립니다
 
-압축 파일 수령 후:
-1. `modem-log-analyzer-vX.X.X-macos.zip` 압축을 해제합니다
-2. 터미널을 열고 압축 해제된 폴더로 이동한 후 실행 권한을 부여합니다:
-   ```
-   cd modem-log-analyzer-vX.X.X-macos
-   chmod +x run.command
-   ```
-3. `Modem Log Analyzer.app`을 더블클릭합니다 (또는 `run-dev.command`를 더블클릭하여 개발 모드로 실행)
-4. 앱 윈도우가 자동으로 열립니다
+> 💡 Python, venv 등 사전 설치가 필요 없습니다 — standalone 앱입니다.
 
 > 💡 `.app`을 Dock에 고정하면 빠르게 실행할 수 있습니다.
 

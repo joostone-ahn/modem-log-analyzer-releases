@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.5.0
+**Version:** v1.6.0
 
 ---
 
@@ -43,23 +43,22 @@ On a fresh PC, run `setup-wsl.bat` before using the EXE:
 
 ⚠️ **Note:** On first run, a `modem-log-analyzer-linux` file is created next to the exe. Do not delete this file.
 
-### macOS (Private Distribution)
+### macOS (DMG)
 
-The macOS version is available upon request.
+> ⚠️ Prerequisite: [Homebrew](https://brew.sh) must be installed. Required dependencies (Wireshark, libusb, etc.) are auto-installed on first launch.
 
-> **Author:** JUSEOK AHN (ajs3013@lguplus.co.kr)
+1. Download the latest `Modem-Log-Analyzer-vX.X.X-macOS.dmg` from [Releases](https://github.com/joostone-ahn/modem-log-analyzer-releases/releases)
+2. Double-click the DMG file to mount it
+3. Drag `Modem Log Analyzer.app` to the Applications folder (or any location)
+4. On first launch, macOS Gatekeeper will show a warning:
+   - **Right-click** the .app → **Open** → click **Open**
+   - Subsequent launches work with a normal double-click
+5. A splash screen appears and installs dependencies (first time only, 2-3 min)
+6. The app window opens automatically when ready
 
-After receiving the archive:
-1. Unzip `modem-log-analyzer-vX.X.X-macos.zip`
-2. Open Terminal, navigate to the extracted folder, and grant execute permission:
-   ```
-   cd modem-log-analyzer-vX.X.X-macos
-   chmod +x run.command
-   ```
-3. Double-click `Modem Log Analyzer.app` (or double-click `run-dev.command` for development mode)
-4. The app window opens automatically
+> 💡 No Python, venv, or other prerequisites needed — it's a standalone app.
 
-> 💡 You can pin the `.app` to Dock for quick access.
+> 💡 Pin the .app to the Dock for quick access.
 
 ---
 
