@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.6.2
+**Version:** v1.6.4
 
 ---
 
@@ -205,12 +205,15 @@ Protocol colors:
 
 ### 4.3 Filtering
 
-Type text in the top input field to filter by protocol, channel, or message name.
+Type text in the top filter input to filter by protocol, channel, or message name in real-time.
 
 ### 4.4 Detail Panel
 
 Click a message to display the full decoding tree on the right.
-- **Ctrl+F** (Cmd+F): Search within detail content
+- **Ctrl+F** (Cmd+F): Focus search within detail content
+- Search auto-navigates to first match on input
+- **Enter**: Navigate to next match
+- **Shift+Enter**: Navigate to previous match
 - **▲▼**: Navigate to previous/next match
 - **Copy**: Copy detail content to clipboard
 
@@ -219,6 +222,10 @@ Click a message to display the full decoding tree on the right.
 | Key | Action |
 |-----|--------|
 | `↑` / `↓` | Select previous/next message |
+| `⌘+F` / `Ctrl+F` | Focus detail panel search |
+| `Enter` | Next search match |
+| `Shift+Enter` | Previous search match |
+| `⌘+S` / `Ctrl+S` | Save pcap file |
 
 ---
 
