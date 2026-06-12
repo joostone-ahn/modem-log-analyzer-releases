@@ -82,7 +82,7 @@
 1. 단말을 USB로 PC에 연결합니다
 2. **Windows:** 장치 관리자에서 포트가 인식되는지 확인합니다
 3. 앱에서 **Connect** 버튼을 클릭합니다
-4. 디바이스 감지 → USB를 WSL로 전달 → scat 시작 (약 8초)
+4. 디바이스 감지 → USB를 WSL로 전달 → DIAG 캡처 시작 (약 8초)
 5. 상태 표시가 녹색 ●으로 변경되고 메시지가 실시간으로 표시됩니다
 
 > Connect 시 Windows의 USB 포트가 WSL로 넘어가므로 장치 관리자에서 사라집니다. 이는 정상입니다.
@@ -101,7 +101,7 @@
 ### 2.4 연결 해제 (Disconnect)
 
 **Disconnect** 버튼을 클릭하면:
-1. scat 캡처가 중지됩니다
+1. DIAG 캡처가 중지됩니다
 2. USB 디바이스가 WSL에서 분리(detach + unbind)됩니다
 3. Windows 장치 관리자에 포트가 다시 나타납니다
 4. 다른 도구(QXDM 등)에서 포트를 사용할 수 있습니다
@@ -154,7 +154,7 @@
 | 확장자 | 설명 |
 |--------|------|
 | `.pcap` | Wireshark 캡처 파일 (tshark로 직접 파싱) |
-| `.hdf` | Qualcomm HDF 로그 (scat으로 pcap 변환 후 파싱) |
+| `.hdf` | Qualcomm HDF 로그 (자체 DIAG 파이프라인으로 pcap 변환 후 파싱) |
 | `.qmdl` | Qualcomm QMDL 로그 |
 | `.dlf` | Qualcomm DLF 로그 |
 | `.sdm` | Samsung Shannon DM 로그 (미검증) |
@@ -166,14 +166,11 @@
 | 업로드 파일 | Save 동작 |
 |------------|-----------|
 | `.pcap` | 원본 pcap 파일을 그대로 다운로드 |
-| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | scat으로 변환된 pcap 파일을 다운로드 |
+| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | 자체 DIAG 파이프라인으로 변환된 pcap 파일을 다운로드 |
 
 **활용:**
 - DM 로그를 pcap으로 변환하여 Wireshark에서 열 수 있습니다
-- Wireshark에서 디코딩하려면 [scat.lua](https://raw.githubusercontent.com/fgsect/scat/master/wireshark/scat.lua) 플러그인이 필요합니다
-- 적용: 다운로드 후 Wireshark 플러그인 디렉터리에 복사  
-  - macOS/Linux: `~/.local/lib/wireshark/plugins/scat.lua`  
-  - Windows: `%APPDATA%\Wireshark\plugins\scat.lua`
+- 변환된 pcap은 GSMTAP 형식이며, Wireshark에서 바로 디코딩됩니다
 
 ---
 
@@ -240,15 +237,15 @@
 
 ### 5.2 연결 성공했지만 메시지가 안 나옴
 
-**scat 미지원 칩셋:**
-- 최신 EXE로 업데이트하세요 (scat upstream 최신 버전이 번들됨)
+**미지원 칩셋:**
+- 최신 EXE로 업데이트하세요 (최신 DIAG 드라이버가 번들됨)
 
 **DIAG 세션 손상 (삼성 단말에서 자주 발생):**
 - 단말을 **재부팅** (전원 Off → On) 하세요
 - 재부팅 후 USB 재연결 → **Connect**
 
 **NR-RRC만 안 나오는 경우:**
-- scat.lua 플러그인 문제. 최신 EXE를 재설치하세요
+- tshark 버전 문제일 수 있습니다. 최신 EXE를 재설치하세요
 
 ### 5.3 EXE 실행 시 "Waiting for server" timeout
 

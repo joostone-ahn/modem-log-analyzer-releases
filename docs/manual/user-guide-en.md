@@ -82,7 +82,7 @@ The smartphone must expose a diagnostic (DIAG) port over USB.
 1. Connect the device to PC via USB
 2. **Windows:** Verify the port appears in Device Manager
 3. Click the **Connect** button in the app
-4. Device detection → USB transfer to WSL → scat start (approx. 8 seconds)
+4. Device detection → USB transfer to WSL → DIAG capture start (approx. 8 seconds)
 5. Status indicator turns green ● and messages appear in real time
 
 > During Connect, the USB port moves from Windows to WSL. It disappears from Device Manager — this is normal.
@@ -101,7 +101,7 @@ The smartphone must expose a diagnostic (DIAG) port over USB.
 ### 2.4 Disconnection (Disconnect)
 
 Clicking **Disconnect**:
-1. Stops the scat capture
+1. Stops the DIAG capture
 2. Detaches and unbinds the USB device from WSL
 3. The port reappears in Windows Device Manager
 4. Other tools (QXDM, etc.) can now use the port
@@ -154,7 +154,7 @@ Use the **USB Mode / File Mode** toggle in the toolbar.
 | Extension | Description |
 |-----------|-------------|
 | `.pcap` | Wireshark capture file (parsed directly by tshark) |
-| `.hdf` | Qualcomm HDF log (converted to pcap via scat) |
+| `.hdf` | Qualcomm HDF log (converted to pcap via native DIAG pipeline) |
 | `.qmdl` | Qualcomm QMDL log |
 | `.dlf` | Qualcomm DLF log |
 | `.sdm` | Samsung Shannon DM log (untested) |
@@ -166,14 +166,11 @@ After file parsing, a **Save** button appears in the toolbar.
 | Uploaded File | Save Action |
 |---------------|-------------|
 | `.pcap` | Downloads the original pcap as-is |
-| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | Downloads the pcap converted by scat |
+| `.hdf` / `.qmdl` / `.dlf` / `.sdm` | Downloads the pcap converted by the native DIAG pipeline |
 
 **Use cases:**
 - Convert DM logs to pcap for viewing in Wireshark
-- Decoding in Wireshark requires the [scat.lua](https://raw.githubusercontent.com/fgsect/scat/master/wireshark/scat.lua) plugin
-- Installation: download and copy to Wireshark plugin directory  
-  - macOS/Linux: `~/.local/lib/wireshark/plugins/scat.lua`  
-  - Windows: `%APPDATA%\Wireshark\plugins\scat.lua`
+- Converted pcap uses GSMTAP format and is decoded natively by Wireshark
 
 ---
 
@@ -241,14 +238,14 @@ Click a message to display the full decoding tree on the right.
 ### 5.2 Connected But No Messages
 
 **Unsupported chipset:**
-- Update to the latest EXE version (bundles latest scat upstream)
+- Update to the latest EXE version (bundles the latest DIAG driver)
 
 **DIAG session corruption (common on Samsung devices):**
 - **Reboot the device** (power off → on)
 - After reboot, reconnect USB → click **Connect**
 
 **Only NR-RRC missing:**
-- scat.lua plugin issue. Reinstall the latest EXE.
+- Possible tshark version issue. Reinstall the latest EXE.
 
 ### 5.3 "Waiting for server" Timeout on Launch
 

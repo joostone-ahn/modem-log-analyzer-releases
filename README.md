@@ -18,9 +18,9 @@ This pipeline enables automated compliance checks, PHY-layer visualization from 
 
 ## ✨ Key Features
 
-- **Real-time Capture**: USB DIAG → scat → tshark loopback decode → instant SSE push
+- **Real-time Capture**: USB DIAG → custom DIAG driver → tshark loopback decode → instant SSE push
 - **Cross-platform**: macOS (native) and Windows (WSL2 + usbipd)
-- **Direct USB DIAG**: Access via scat + pyusb, no commercial tools needed
+- **Direct USB DIAG**: Custom DIAG driver + pyusb, no commercial tools needed
 - **File Load**: Open .pcap / .hdf / .qmdl / .dlf files
 - **Protocol Support**: NR-RRC, LTE-RRC, NAS-5GS, NAS-EPS
 - **AT Command**: Power Off/On (AT+CFUN) without leaving the tool
@@ -44,7 +44,7 @@ Download the latest release from [Releases](https://github.com/joostone-ahn/mode
 1. Download `Modem-Log-Analyzer-vX.X.X.exe`
 2. Double-click to run
 
-> **First run:** WSL2, usbipd, scat, tshark are installed automatically (may require reboot).  
+> **First run:** WSL2, usbipd, tshark are installed automatically (may require reboot).  
 > **Subsequent runs:** Instant startup.  
 > A `modem-log-analyzer-linux` file is created next to the exe — do not delete it.
 
@@ -74,4 +74,4 @@ This software is provided free of charge for personal and internal use.
 You may not modify, distribute, sublicense, or sell copies of this software
 without explicit written permission from the author.
 
-Relies on [tshark](https://www.wireshark.org/) (GPL-2.0) and [scat](https://github.com/fgsect/scat) (GPL-2.0) as external subprocesses.
+Relies on [tshark](https://www.wireshark.org/) (GPL-2.0) as an external subprocess for protocol decoding.
