@@ -1,6 +1,6 @@
 # Modem Log Analyzer User Guide
 
-**Version:** v1.6.4
+**Version:** v1.7.0
 
 ---
 
@@ -157,11 +157,26 @@ Use the **USB Mode / File Mode** toggle in the toolbar.
 | `.hdf` | Qualcomm HDF log (converted to pcap via native DIAG pipeline) |
 | `.qmdl` | Qualcomm QMDL log |
 | `.dlf` | Qualcomm DLF log |
-| `.sdm` | Samsung Shannon DM log (untested) |
+| `.sdm` | Samsung Shannon DM log |
 
-### 3.3 Save (PCAP Download)
+### 3.3 Multi-file Selection (SDM)
 
-After file parsing, a **Save** button appears in the toolbar.
+When multiple `.sdm` files are selected simultaneously, they are merged in chronological order.
+
+- In the **Open File** dialog, Cmd/Ctrl+click to select multiple `.sdm` files
+- **Drag and drop** multiple `.sdm` files at once
+- The merged result is converted to a single pcap and displayed in the message list
+
+### 3.4 Filename Status Display
+
+After file analysis, the filename is displayed at the top of the toolbar.
+
+- Single file: `📄 TC1.1.sdm`
+- Multi-file merge: `📄 8 files merged`
+
+### 3.5 Save (PCAP Download)
+
+After file parsing, a **Save** button appears next to the status indicator in the toolbar.
 
 | Uploaded File | Save Action |
 |---------------|-------------|
